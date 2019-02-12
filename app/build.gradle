@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+//    buildToolsVersion "25.0.0"
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "com.rock.jbjianwu"
+        minSdkVersion 18
+        targetSdkVersion 28
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
+
+        manifestPlaceholders = [
+//                老信息
+//                XG_ACCESS_ID:"2100286410",
+//                XG_ACCESS_KEY : "AAV99M2M23KC",
+
+                XG_ACCESS_ID:"2100326646",
+                XG_ACCESS_KEY : "ARTX66KL597H",
+                HW_APPID: "100622921"
+        ]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+        }
+    }
+
+}
+
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar']) //引入libs下所有jar
+
+
+//    //信鸽jar
+//    implementation 'com.tencent.xinge:xinge:3.2.2-release'
+//    //wup包
+//    implementation 'com.tencent.wup:wup:1.0.0.E-release'
+//    //mid包
+//    implementation 'com.tencent.mid:mid:4.0.6-release'
+
+    //信鸽普通版本jar，不包含厂商通道
+    implementation  'com.tencent.xinge:xinge:4.0.5-release'
+    //implementation'com.tencent.xinge:xinge:4.3.1-beta'
+    //jg包
+    implementation'com.tencent.jg:jg:1.1'
+    //wup包
+    implementation 'com.tencent.wup:wup:1.0.0.E-release'
+    //mid包，minSdkVersion 14
+    implementation 'com.tencent.mid:mid:4.0.7-Release'
+    implementation 'com.tencent.xinge:xghw:3.2.7-release'
+    implementation 'com.tencent.xinge:xghw:3.2.8-Release'
+}
