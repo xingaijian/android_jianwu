@@ -12,16 +12,21 @@ android {
 
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
 
         manifestPlaceholders = [
+
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "b766ff5f10fac75f176c8099", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
 //                老信息
 //                XG_ACCESS_ID:"2100286410",
 //                XG_ACCESS_KEY : "AAV99M2M23KC",
 
-                XG_ACCESS_ID:"2100326646",
-                XG_ACCESS_KEY : "ARTX66KL597H",
-                HW_APPID: "100622921"
+//                XG_ACCESS_ID:"2100326646",
+//                XG_ACCESS_KEY : "ARTX66KL597H",
+//                HW_APPID: "100622921"
         ]
     }
 
@@ -50,26 +55,22 @@ android {
 
 
 dependencies {
-
-    implementation fileTree(dir: 'libs', include: ['*.jar']) //引入libs下所有jar
-
-
-//    //信鸽jar
-//    implementation 'com.tencent.xinge:xinge:3.2.2-release'
-//    //wup包
-//    implementation 'com.tencent.wup:wup:1.0.0.E-release'
-//    //mid包
-//    implementation 'com.tencent.mid:mid:4.0.6-release'
-
-    //信鸽普通版本jar，不包含厂商通道
-    implementation  'com.tencent.xinge:xinge:4.0.5-release'
-    //implementation'com.tencent.xinge:xinge:4.3.1-beta'
-    //jg包
-    implementation'com.tencent.jg:jg:1.1'
-    //wup包
-    implementation 'com.tencent.wup:wup:1.0.0.E-release'
-    //mid包，minSdkVersion 14
-    implementation 'com.tencent.mid:mid:4.0.7-Release'
-    implementation 'com.tencent.xinge:xghw:3.2.7-release'
-    implementation 'com.tencent.xinge:xghw:3.2.8-Release'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //    //信鸽普通版本jar，不包含厂商通道
+    //    implementation  'com.tencent.xinge:xinge:4.0.5-release'
+    //    //implementation'com.tencent.xinge:xinge:4.3.1-beta'
+    //    //jg包
+    //        implementation'com.tencent.jg:jg:1.1'
+    //        //wup包
+    //        implementation 'com.tencent.wup:wup:1.0.0.E-release'
+    //        //mid包，minSdkVersion 14
+    //        implementation 'com.tencent.mid:mid:4.0.7-Release'
+    //    implementation 'com.tencent.xinge:xghw:3.2.7-release'
+    //    implementation 'com.tencent.xinge:xghw:3.2.8-Release'
+//    implementation files('libs/jcore-android-1.2.7.jar')
+//    implementation files('libs/jpush-android-3.1.8.jar')
+    implementation files('libs/TencentLocationSDK_v5.0.1_r251203_170116_1729.jar')
+    implementation files('libs/TencentMapSDK_Raster_v_1.2.7_51ae0e7.jar')
+    implementation 'cn.jiguang.sdk:jpush:3.1.8'
+    implementation 'cn.jiguang.sdk:jcore:1.2.7'
 }

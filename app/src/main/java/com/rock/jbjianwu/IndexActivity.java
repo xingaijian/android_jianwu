@@ -12,8 +12,6 @@ import com.lib.RockActivity;
 import com.lib.RockFile;
 import com.lib.RockHttp;
 import com.lib.SqliteClass;
-import com.tencent.android.tpush.XGIOperateCallback;
-import com.tencent.android.tpush.XGPushManager;
 import com.view.ImageViewXinhu;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
@@ -1209,23 +1207,23 @@ public class IndexActivity extends RockActivity {
 		JPush.init(this, Xinhu.admintoken);
 	}
 
-	//初始化信鸽推送
-	private void initXinge()
-	{
-		CLog.debug("注册信鸽:"+Xinhu.admintoken+"");
-		XGPushManager.registerPush(this, Xinhu.admintoken, new XGIOperateCallback(){
-
-			@Override
-			public void onSuccess(Object data, int flag) {
-				CLog.debug("信鸽注册成功，设备token为：" + data);
-			}
-
-			@Override
-			public void onFail(Object data, int errCode, String msg) {
-				CLog.debug("信鸽注册失败，错误码：" + errCode + ",错误信息：" + msg);
-			}
-		});
-	}
+//	//初始化信鸽推送
+//	private void initXinge()
+//	{
+//		CLog.debug("注册信鸽:"+Xinhu.admintoken+"");
+//		XGPushManager.registerPush(this, Xinhu.admintoken, new XGIOperateCallback(){
+//
+//			@Override
+//			public void onSuccess(Object data, int flag) {
+//				CLog.debug("信鸽注册成功，设备token为：" + data);
+//			}
+//
+//			@Override
+//			public void onFail(Object data, int errCode, String msg) {
+//				CLog.debug("信鸽注册失败，错误码：" + errCode + ",错误信息：" + msg);
+//			}
+//		});
+//	}
 
 	//推送
 	private void initPush()

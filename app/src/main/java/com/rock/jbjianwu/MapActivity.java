@@ -5,9 +5,7 @@
 package com.rock.jbjianwu;
 
 
-
 import android.view.View;
-
 
 import com.lib.RockActivity;
 import com.tencent.mapsdk.raster.model.BitmapDescriptorFactory;

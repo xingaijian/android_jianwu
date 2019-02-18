@@ -24,7 +24,9 @@ public class JPush {
     public static void init(Context context, String alias) {
         mContext = context;
         if(!Rock.isEmpt(alias))mAlias   = alias;
-        JPushInterface.init(context);
+
+//        JPushInterface.init(context);
+
         if (JPushInterface.isPushStopped(context)) {
             JPushInterface.resumePush(context);
         }
@@ -33,18 +35,21 @@ public class JPush {
 
     //设置别名和标签
     private static void initJpushsetAlias() {
-        JPushInterface.setAliasAndTags(mContext, mAlias, null, new TagAliasCallback() {
-            @Override
-            public void gotResult(int code, String alias, Set<String> tags) {
-                if(code==0) {
-                    //Rock.Toast(mActivity, "OK:"+alias+"");
-                }else if(code==6002){
-                    initJpushsetAlias();
-                }else{
 
-                }
-            }
-        });
+        JPushInterface.setAlias(mContext,1,mAlias); //
+
+//        JPushInterface.setAliasAndTags(mContext, mAlias, null, new TagAliasCallback() {
+//            @Override
+//            public void gotResult(int code, String alias, Set<String> tags) {
+//                if(code==0) {
+//                    //Rock.Toast(mActivity, "OK:"+alias+"");
+//                }else if(code==6002){
+//                    initJpushsetAlias();
+//                }else{
+//
+//                }
+//            }
+//        });
     }
 
     //用服务的启动
