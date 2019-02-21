@@ -56,21 +56,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    //    //信鸽普通版本jar，不包含厂商通道
-    //    implementation  'com.tencent.xinge:xinge:4.0.5-release'
-    //    //implementation'com.tencent.xinge:xinge:4.3.1-beta'
-    //    //jg包
-    //        implementation'com.tencent.jg:jg:1.1'
-    //        //wup包
-    //        implementation 'com.tencent.wup:wup:1.0.0.E-release'
-    //        //mid包，minSdkVersion 14
-    //        implementation 'com.tencent.mid:mid:4.0.7-Release'
-    //    implementation 'com.tencent.xinge:xghw:3.2.7-release'
-    //    implementation 'com.tencent.xinge:xghw:3.2.8-Release'
-//    implementation files('libs/jcore-android-1.2.7.jar')
-//    implementation files('libs/jpush-android-3.1.8.jar')
     implementation files('libs/TencentLocationSDK_v5.0.1_r251203_170116_1729.jar')
     implementation files('libs/TencentMapSDK_Raster_v_1.2.7_51ae0e7.jar')
     implementation 'cn.jiguang.sdk:jpush:3.1.8'
     implementation 'cn.jiguang.sdk:jcore:1.2.7'
+
 }

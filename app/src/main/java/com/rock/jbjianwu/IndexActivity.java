@@ -1228,13 +1228,14 @@ public class IndexActivity extends RockActivity {
 	//推送
 	private void initPush()
 	{
-		//小米手机用小米推送，其他用极光
+		initJpush(); //极光
+/*		//小米手机用小米推送，其他用极光
 		if(Rock.isxiaomi()){
 			initXiaoMi();
 		}else{
-			initJpush();
+//			initJpush();
 			//initXinge();//信鸽的
-		}
+		}*/
 	}
 
 	/**
