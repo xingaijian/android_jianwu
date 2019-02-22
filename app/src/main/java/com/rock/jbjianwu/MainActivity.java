@@ -1,18 +1,44 @@
 package com.rock.jbjianwu;
 
 
-
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lib.CDate;
 import com.lib.Rock;
 import com.lib.RockActivity;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.FileCallback;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Progress;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.Request;
 import com.view.ImageViewXinhu;
 
+import java.io.File;
+
 public class MainActivity extends RockActivity {
+
+	private String versionCode = "";
+	private String versionName = "";
+	private String versionUrl = "";
+	private String versionMessage = "";
 
 	/**
 	 * 初始化
@@ -37,7 +63,11 @@ public class MainActivity extends RockActivity {
 		//设置全屏
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		RunTimer(15, 2000);//启动页面1秒就好了
+
+		upapk();
+
+
+
 		//openmain();
 	}
 
@@ -63,4 +93,147 @@ public class MainActivity extends RockActivity {
 		ImageViewXinhu imga = (ImageViewXinhu)findViewById(R.id.myicons);
 		imga.setPath("images/logo.png");
 	}
+
+	/**
+	 * 1.获取版本信息
+	 */
+	private void upapk(){
+		OkGo.<String>get(UrlUtil.UPAPK)
+				.tag(this)
+				.execute(new StringCallback() {
+					@Override
+					public void onSuccess(Response<String> response) {
+						UpdateBean updateBean = FastJsonUtils.getObject(response.body(),UpdateBean.class);
+						versionCode = updateBean.getVersionCode();
+						versionName = updateBean.getVersionName();
+						versionUrl = updateBean.getApkurl();
+						versionMessage = updateBean.getMessage();
+
+						if (updateJudge()){
+							dialogUp();
+						}else {
+							RunTimer(15, 2000);//启动页面1秒就好了
+						}
+					}
+				});
+	}
+
+	/**
+	 * 2.判断是否更新
+	 */
+	private boolean updateJudge(){
+		PackageManager packageManager = getPackageManager();
+		PackageInfo packInfo = null;
+		try {
+			packInfo = packageManager.getPackageInfo(getPackageName(),0);
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		if (Integer.parseInt(versionCode) > packInfo.versionCode ){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	/**
+	 * 3.弹窗更新提示
+	 */
+	private void dialogUp(){
+		AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+//		alertDialogBuilder.setIcon(R.drawable.)
+		alertDialogBuilder.setTitle("版本更新");
+		alertDialogBuilder.setMessage(versionMessage);
+		alertDialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+				//更新应用提醒
+				ProgressDialog progressDialog;
+				progressDialog = new ProgressDialog(MainActivity.this);
+				progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				progressDialog.setMessage("软件更新中，请稍等~");
+				progressDialog.setCancelable(true);
+				progressDialog.show();
+
+				getFile();
+			}
+		});
+
+		alertDialogBuilder.setCancelable(false);
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();//将dialog显示出来
+	}
+
+	/**
+	 * 下载apk
+	 */
+	private void getFile(){
+
+		String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/download";
+		final String fileName = "dzjcy.apk";
+		final File file = new File(filePath + "/" + fileName);
+		if (file.exists()){
+			file.delete();
+		}
+		OkGo.<File>get(versionUrl)
+				.tag(this)
+				.execute(new FileCallback(filePath, fileName) {
+					@Override
+					public void onStart(Request<File, ? extends Request> request) {
+						super.onStart(request);
+						Log.e("MainActivity", "开始下载" );
+					}
+
+					@Override
+					public void onSuccess(Response<File> response) {
+						Log.e("MainActivity", "file--" + file);
+						openFile(file);
+					}
+
+					@Override
+					public void onError(Response<File> response) {
+						super.onError(response);
+						Log.e("MainActivity", "onError: "+response.message());
+					}
+
+					@Override
+					public void downloadProgress(Progress progress) {
+						super.downloadProgress(progress);
+						Log.e("MainActivity", "progress" + progress.fraction * 100);
+					}
+				});
+	}
+
+	//打开APK程序代码
+	private void openFile(File file) {
+
+		//Android 7.0及以上
+		if (Build.VERSION.SDK_INT >= 24) {
+            boolean hasInstallPermission = false;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                hasInstallPermission = this.getPackageManager().canRequestPackageInstalls();
+                if (!hasInstallPermission) {
+                    //请求安装未知应用来源的权限
+                    ActivityCompat.requestPermissions((Activity) this, new String[]{Manifest.permission.REQUEST_INSTALL_PACKAGES}, 6666);
+                }
+            }
+			Log.e("MainActivity", ">=24" );
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			Uri apkUri = FileProvider.getUriForFile(this, "com.dzjcy.provider", file);
+			intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+			this.startActivity(intent);
+			finish();
+		} else {
+			Log.e("MainActivity", "小于24" );
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+			this.startActivity(intent);
+			finish();
+		}
+	}
+
 }

@@ -9,7 +9,8 @@ android {
         applicationId "com.rock.jbjianwu"
         minSdkVersion 18
         targetSdkVersion 28
-
+        versionCode 0
+        versionName "1.1"
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
@@ -58,7 +59,12 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/TencentLocationSDK_v5.0.1_r251203_170116_1729.jar')
     implementation files('libs/TencentMapSDK_Raster_v_1.2.7_51ae0e7.jar')
-    implementation 'cn.jiguang.sdk:jpush:3.1.8'
-    implementation 'cn.jiguang.sdk:jcore:1.2.7'
+    implementation 'cn.jiguang.sdk:jpush:3.1.8' //极光
+    implementation 'cn.jiguang.sdk:jcore:1.2.7'//极光
 
+    implementation 'com.lzy.net:okgo:3.0.4' //网络请求 okgo
+    implementation 'com.alibaba:fastjson:1.1.70.android'
+    implementation 'com.alibaba:fastjson:1.2.55'
+
+    implementation 'com.android.support:appcompat-v7:26.1.0'
 }
