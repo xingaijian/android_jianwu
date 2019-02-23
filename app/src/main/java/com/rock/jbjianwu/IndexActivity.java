@@ -1,10 +1,27 @@
 package com.rock.jbjianwu;
 
 
+import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Message;
+import android.view.ContextMenu;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import com.lib.A;
 import com.lib.CDate;
-import com.lib.CLog;
 import com.lib.Jiami;
 import com.lib.Json;
 import com.lib.Rock;
@@ -15,37 +32,10 @@ import com.lib.SqliteClass;
 import com.view.ImageViewXinhu;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
-
-import android.annotation.TargetApi;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
-
-import android.content.Intent;
-import android.content.IntentFilter;
-
-import android.graphics.Color;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Message;
-import android.view.ContextMenu;
-import android.view.KeyEvent;
-import android.view.Menu;
-
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.TextView;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -496,8 +486,8 @@ public class IndexActivity extends RockActivity {
 			final String url = a.get("url");
 			final String tit = a.get("title");
 
-			//不是小米推送并且未激活前台
-			if(!isboolshow && !Rock.equals(ptype,Xinhu.PUSH_MESSAGE_TYPE_XIAOMI)) {
+			//未激活前台   (不是小米推送 && !Rock.equals(ptype,Xinhu.PUSH_MESSAGE_TYPE_XIAOMI))
+			if(!isboolshow) {
 				Xinhu.Notification(mActivity, 0, tit, cont);
 			}
 
@@ -599,9 +589,9 @@ public class IndexActivity extends RockActivity {
 				Xinhu.sendBroadcast(this, Xinhu.ACTION_CHATRECEMESS);
 			}else if(!isboolshow){
 				//没有打开才发送通知(非小米)
-				if(!Rock.equals(pushmessagemap.get("ptype"),Xinhu.PUSH_MESSAGE_TYPE_XIAOMI)){
-					Xinhu.Notification(this, R.drawable.xinhu, pushmessagemap.get("name"), Jiami.base64decode(pushmessagemap.get("cont")));
-				}
+//				if(!Rock.equals(pushmessagemap.get("ptype"),Xinhu.PUSH_MESSAGE_TYPE_XIAOMI)){
+				Xinhu.Notification(this, R.drawable.xinhu, pushmessagemap.get("name"), Jiami.base64decode(pushmessagemap.get("cont")));
+//				}
 			}
 		}
 		isboolone= false;

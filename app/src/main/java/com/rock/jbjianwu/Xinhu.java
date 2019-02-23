@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
 
 import com.lib.Jiami;
 import com.lib.Rock;
@@ -53,7 +54,7 @@ public class Xinhu {
 
     public static String PUSH_MESSAGE_TYPE   = "push_message_type";
     public static String PUSH_MESSAGE_TYPE_JPUSH   = "jpush";
-    public static String PUSH_MESSAGE_TYPE_XIAOMI   = "xiaomi";
+//    public static String PUSH_MESSAGE_TYPE_XIAOMI   = "xiaomi";
 
     public static String ACTION_MESSAGE      = "com.rock.jbjianwu.MESSAGE";  //接收到消息
 
@@ -172,20 +173,37 @@ public class Xinhu {
     }
 
     /**
-     * 发通知  TODO 需修改
+     * 发通知
      * */
     public static void Notification(Context context, int icon, String title, String cont)
     {
+        int id = 99; //消息Id
         NotificationManager notifmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification.Builder builder1 = new Notification.Builder(context);
+        builder1.setSmallIcon(R.drawable.icons); //设置图标
+        builder1.setTicker("显示第二个通知");
+        builder1.setContentTitle(title); //设置标题
+        builder1.setContentText(cont); //消息内容
+        builder1.setWhen(System.currentTimeMillis()); //发送时间
+        builder1.setDefaults(Notification.DEFAULT_ALL); //设置默认的提示音，振动方式，灯光
+        builder1.setAutoCancel(true);//打开程序后图标消失
+        Intent intent =new Intent (context,IndexActivity.class);
+        PendingIntent pendingIntent =PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.setAction(ACTION_CLICKNOTI);
+        builder1.setContentIntent(pendingIntent); Notification notification1 = builder1.build();
+        notifmanager.notify(id, notification1); // 通过通知管理器发送通知
+
+
+
+/*        NotificationManager notifmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         int id              = 99; //消息Id
-        if(icon == 0)icon   = R.drawable.icons;
+//        if(icon == 0)
+        icon   = R.drawable.icons;
         //打开主页
         Intent intent_to 	= new Intent(context, IndexActivity.class);
         PendingIntent pi 	= PendingIntent.getActivity(context, id, intent_to, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        //intent_to.setAction(ACTION_CLICKNOTI);
-        //PendingIntent pi = PendingIntent.getBroadcast(context, id, intent_to, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        intent_to.setAction(ACTION_CLICKNOTI);
+        PendingIntent pi = PendingIntent.getBroadcast(context, id, intent_to, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notif 	= new Notification();
 
         notif.icon          = icon;//图标
@@ -194,8 +212,8 @@ public class Xinhu {
         //notif.defaults      |= Notification.DEFAULT_SOUND; //添加声音
         notif.sound         = Uri.parse("android.resource://"+ context.getPackageName()+ "/" + R.raw.todo);//自定义声音
         notif.flags         = Notification.FLAG_AUTO_CANCEL; //点击自动取消
-//        notif.setLatestEventInfo(context, title, cont, pi);
-        notifmanager.notify(id, notif); //发出通知
+        notif.setLatestEventInfo(context, title, cont, pi);
+        notifmanager.notify(id, notif); //发出通知*/
 
     }
 
