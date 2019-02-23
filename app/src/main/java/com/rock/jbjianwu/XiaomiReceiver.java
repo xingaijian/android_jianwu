@@ -74,7 +74,7 @@ public class XiaomiReceiver extends PushMessageReceiver {
         ent.setAction(Xinhu.ACTION_MESSAGE);
         ent.putExtra(JPushInterface.EXTRA_TITLE, message.getTitle());
         ent.putExtra(JPushInterface.EXTRA_MESSAGE, content);
-        ent.putExtra(Xinhu.PUSH_MESSAGE_TYPE, Xinhu.PUSH_MESSAGE_TYPE_XIAOMI);
+//        ent.putExtra(Xinhu.PUSH_MESSAGE_TYPE, Xinhu.PUSH_MESSAGE_TYPE_XIAOMI);
         context.sendBroadcast(ent);
 
         //Message msg = Message.obtain();

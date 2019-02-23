@@ -41,8 +41,8 @@
         <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />  允许程序开机自动运行 -->
 
     <!-- 小米推送的 -->
-    <permission android:name="com.rock.jbjianwu.permission.MIPUSH_RECEIVE" android:protectionLevel="signature" />
-    <uses-permission android:name="com.rock.xinhuapk.permission.MIPUSH_RECEIVE" />
+    <!--<permission android:name="com.rock.jbjianwu.permission.MIPUSH_RECEIVE" android:protectionLevel="signature" />-->
+    <!--<uses-permission android:name="com.rock.xinhuapk.permission.MIPUSH_RECEIVE" />-->
 
 
     <application
@@ -221,7 +221,7 @@
 
 
         <!-- 小米的 -->
-        <service
+        <!--<service
             android:enabled="true"
             android:process=":pushservice"
             android:name="com.xiaomi.push.service.XMPushService"/>
@@ -270,30 +270,7 @@
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
-
-        <!--信鸽的
-        <receiver android:name=".XingeReceiver" android:exported="true" >
-            <intent-filter>
-               
-                <action android:name="com.tencent.android.tpush.action.PUSH_MESSAGE" />
-               
-                <action android:name="com.tencent.android.tpush.action.FEEDBACK" />
-            </intent-filter>
-        </receiver>
-		-->
-        <!--<receiver android:name="com.tencent.android.hwpush.HWPushMessageReceiver" >-->
-            <!--<intent-filter>-->
-
-                <!--&lt;!&ndash; 必须,用于接收TOKEN &ndash;&gt;-->
-                <!--<action android:name="com.huawei.android.push.intent.REGISTRATION" />-->
-                <!--&lt;!&ndash; 必须，用于接收消息 &ndash;&gt;-->
-                <!--<action android:name="com.huawei.android.push.intent.RECEIVE" />-->
-                <!--&lt;!&ndash; 可选，用于点击通知栏或通知栏上的按钮后触发onEvent回调 &ndash;&gt;-->
-                <!--<action android:name="com.huawei.android.push.intent.CLICK" />-->
-                <!--&lt;!&ndash; 可选，查看PUSH通道是否连接，不查看则不需要 &ndash;&gt;-->
-                <!--<action android:name="com.huawei.intent.action.PUSH_STATE" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
+-->
     </application>
 
 </manifest>
