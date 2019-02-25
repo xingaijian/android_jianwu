@@ -45,7 +45,7 @@ public class IndexActivity extends RockActivity {
 	private LinearLayout[] showviewobj = new LinearLayout[4];
 	private ImageView[]	   navimageview= new ImageView[4];
 	private TextView[]	   navtextview = new TextView[5];
-	private String[] 		titlearr   = {"应用","消息","联系人","我"};
+	private String[] 		titlearr   = {"消息","应用","联系人","我"};
 
 	private int what_chat = 3001,what_ying = 3002,what_userget = 3003,what_exit = 3004,chatindex=-1,what_chatdown = 3002,what_notmsg=4000,nowchatindex=-1,nowindex=0;
 	private IndexReceiver indexReceiver;
