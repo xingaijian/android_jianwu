@@ -216,7 +216,8 @@
         <meta-data android:name="JPUSH_APPKEY" android:value="b766ff5f10fac75f176c8099" />
 
         <!--腾讯定位key-->
-        <meta-data android:name="TencentMapSDK" android:value="55QBZ-JGYLO-BALWX-SZE4H-5SV5K-JCFV7" />
+        <!--55QBZ-JGYLO-BALWX-SZE4H-5SV5K-JCFV7-->
+        <meta-data android:name="TencentMapSDK" android:value="V3ABZ-TMQK4-AJUUP-XKTBC-YJW4O-MMFIG" />
 
 
 
