@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
@@ -32,14 +33,21 @@ import com.lzy.okgo.request.base.Request;
 import com.view.ImageViewXinhu;
 
 import java.io.File;
+import java.util.List;
 
-public class MainActivity extends RockActivity {
+import pub.devrel.easypermissions.EasyPermissions;
+
+public class MainActivity extends RockActivity implements EasyPermissions.PermissionCallbacks {
 
 	private String versionCode = "";
 	private String versionName = "";
 	private String versionUrl = "";
 	private String versionMessage = "";
-
+	private String[] permissions = {Manifest.permission.CALL_PHONE,Manifest.permission.INTERNET,Manifest.permission.WAKE_LOCK,Manifest.permission.READ_PHONE_STATE,Manifest.permission.WRITE_EXTERNAL_STORAGE,
+			Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.VIBRATE,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,Manifest.permission.ACCESS_NETWORK_STATE,
+			Manifest.permission.WRITE_SETTINGS,Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.VIBRATE,Manifest.permission.SYSTEM_ALERT_WINDOW,
+			Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,Manifest.permission.GET_TASKS,Manifest.permission.REQUEST_INSTALL_PACKAGES,
+			Manifest.permission.CHANGE_WIFI_STATE,Manifest.permission.CHANGE_NETWORK_STATE};
 	/**
 	 * 初始化
 	 * */
@@ -63,12 +71,13 @@ public class MainActivity extends RockActivity {
 		//设置全屏
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-		upapk();
-
-
-
-		//openmain();
+		if (EasyPermissions.hasPermissions(this, permissions)) {
+			//拥有权限进行操作
+			upapk();
+		} else {
+			//没有权限进行提示且申请权限
+			EasyPermissions.requestPermissions(this,"应用需要权限，请允许", 0, permissions);
+		}
 	}
 
 	protected  void handleCallback(Message msg, String bstr){
@@ -236,4 +245,22 @@ public class MainActivity extends RockActivity {
 		}
 	}
 
+	@Override
+	public void onRequestPermissionsResult(int requestCode,String[] permissions,int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		//把申请权限的回调交由EasyPermissions处理
+		EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+	}
+
+	@Override
+	public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+		//申请成功进行的操作
+		upapk();
+	}
+
+	@Override
+	public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+		//申请失败进行的操作
+		EasyPermissions.requestPermissions(this,"应用需要权限，请允许", 0, permissions);
+	}
 }
