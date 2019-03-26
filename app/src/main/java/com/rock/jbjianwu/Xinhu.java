@@ -33,7 +33,7 @@ public class Xinhu {
     public static final String CACAHE_DIRNAME  = "dzjcy"; //缓存目录
 
     //public static String  APIURL 	    = "http://192.168.1.102/app/xinhu/"; //api地址
-    public static String  APIURL 	    = "http://dzjcy.dezhou.name/"; //api地址
+    public static String  APIURL 	    = "http://oa.dzjcy.gov.cn/"; //api地址
     public static String  device 	    = "";   //设备号
 
     //当前用户id和姓名
@@ -125,7 +125,7 @@ public class Xinhu {
      * */
     public static String getapiurl(String m, String a)
     {
-        String url = ""+APIURL+"api.php?m="+m+"&a="+a+"&cfrom=appandroid&device="+device+"&token="+admintoken+"&adminid="+adminid+"";
+        String url = ""+APIURL+"loadapi.php?m="+m+"&a="+a+"&cfrom=appandroid&device="+device+"&token="+admintoken+"&adminid="+adminid+"";
         return url;
     }
 
@@ -260,6 +260,6 @@ public class Xinhu {
      * */
     public static boolean isdemo()
     {
-        return Rock.contain(APIURL, "dzjcy.dezhou.name");
+        return Rock.contain(APIURL, "oa.dzjcy.gov.cn");
     }
 }

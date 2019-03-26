@@ -43,11 +43,13 @@ public class MainActivity extends RockActivity implements EasyPermissions.Permis
 	private String versionName = "";
 	private String versionUrl = "";
 	private String versionMessage = "";
-	private String[] permissions = {Manifest.permission.CALL_PHONE,Manifest.permission.INTERNET,Manifest.permission.WAKE_LOCK,Manifest.permission.READ_PHONE_STATE,Manifest.permission.WRITE_EXTERNAL_STORAGE,
-			Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.VIBRATE,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,Manifest.permission.ACCESS_NETWORK_STATE,
-			Manifest.permission.WRITE_SETTINGS,Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.VIBRATE,Manifest.permission.SYSTEM_ALERT_WINDOW,
-			Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,Manifest.permission.GET_TASKS,Manifest.permission.REQUEST_INSTALL_PACKAGES,
-			Manifest.permission.CHANGE_WIFI_STATE,Manifest.permission.CHANGE_NETWORK_STATE};
+	private String[] permissions = {Manifest.permission.CALL_PHONE,
+			Manifest.permission.WRITE_EXTERNAL_STORAGE,
+			Manifest.permission.RECORD_AUDIO,
+			Manifest.permission.ACCESS_FINE_LOCATION
+			};
+	private int i = 1;
+//	private int j =1;
 	/**
 	 * 初始化
 	 * */
@@ -64,16 +66,21 @@ public class MainActivity extends RockActivity implements EasyPermissions.Permis
 		setface();
 
 
-		String footer = "Copyright ©"+ CDate.now("Y","")+" "+Rock.getstring(this, R.string.appname)+" "+Rock.getstring(this, R.string.appgwurl)+"";
+		String footer = "Copyright ©"+ CDate.now("Y","")+" 德州市人民检察院 "+Rock.getstring(this, R.string.appgwurl)+"";//"+Rock.getstring(this, R.string.appname)+"
 		at = (TextView) findViewById(R.id.banquan);
 		at.setText(footer);
 
 		//设置全屏
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+		Log.e("XingMain", "initCreate permissions : "+ permissions.length);
 		if (EasyPermissions.hasPermissions(this, permissions)) {
+			Log.e("XingMain", "initCreate i : "+ (++i));
 			//拥有权限进行操作
-			upapk();
+//            if ((++i) ==40){
+//                upapk();
+			RunTimer(15, 2000);//启动页面1秒就好了
+//            }
+
 		} else {
 			//没有权限进行提示且申请权限
 			EasyPermissions.requestPermissions(this,"应用需要权限，请允许", 0, permissions);
@@ -123,6 +130,12 @@ public class MainActivity extends RockActivity implements EasyPermissions.Permis
 						}else {
 							RunTimer(15, 2000);//启动页面1秒就好了
 						}
+					}
+
+					@Override
+					public void onError(Response<String> response) {
+						super.onError(response);
+						Toast.makeText(MainActivity.this,"请求版本信息接口失败", Toast.LENGTH_SHORT).show();
 					}
 				});
 	}
@@ -254,13 +267,19 @@ public class MainActivity extends RockActivity implements EasyPermissions.Permis
 
 	@Override
 	public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+
+//		Log.e("XingMain", "initCreate j: "+ (++j) );
 		//申请成功进行的操作
-		upapk();
+//        if ((++j) ==41){
+//            upapk();
+		RunTimer(15, 2000);//启动页面1秒就好了
+//        }
+//				Log.e("XingMain", "initCreate j: "+ j );
 	}
 
 	@Override
 	public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
 		//申请失败进行的操作
-		EasyPermissions.requestPermissions(this,"应用需要权限，请允许", 0, permissions);
+		EasyPermissions.requestPermissions(this,"应用需要权限，请允许", 1, permissions);
 	}
 }

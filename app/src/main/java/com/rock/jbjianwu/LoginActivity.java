@@ -54,7 +54,7 @@ public class LoginActivity extends RockActivity {
 		Xinhu.stopService(this);
 		mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-		String footer = "Copyright ©"+ CDate.now("Y","")+" "+Rock.getstring(this, R.string.appname)+" "+Rock.getstring(this, R.string.appgwurl)+"";
+		String footer = "Copyright ©"+ CDate.now("Y","")+" 德州市人民检察院 "+Rock.getstring(this, R.string.appgwurl)+"";//"+Rock.getstring(this, R.string.appname)+"
 		TextView at = (TextView) findViewById(R.id.banquan);
 		at.setText(footer);
 

@@ -171,7 +171,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="#cccccc"
         android:gravity="center"
-        android:text="Copyright ©2018 智慧检务平台 www.dzjcy.gov.cn"
+        android:text="Copyright ©2019 德州市人民检察院 www.dzjcy.gov.cn"
         android:textSize="14dp" />
 
     <TextView

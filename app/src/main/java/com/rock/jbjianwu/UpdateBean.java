@@ -9,7 +9,7 @@ public class UpdateBean {
     /**
      * versionCode : 1
      * versionName : 2.0
-     * apkurl : http://dzjcy.dezhou.name/dzjcy.apk
+     * apkurl : http://oa.dzjcy.gov.cn/dzjcy.apk
      * message : 1.增加聊天提醒功能 2.修改部分视图
      */
 

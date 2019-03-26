@@ -200,7 +200,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="50dp" android:layout_height="20dp"
                     android:gravity="center"
-                    android:text="应用" android:textColor="#888888" android:textSize="14dp" android:layout_marginBottom="6dp" />
+                    android:text="工作" android:textColor="#888888" android:textSize="14dp" android:layout_marginBottom="6dp" />
 
                 <TextView
                     android:id="@+id/nav_yingstotal"
@@ -241,7 +241,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="50dp" android:layout_height="20dp"
                     android:gravity="center"
-                    android:text="联系人" android:textColor="#888888" android:textSize="14dp" android:layout_marginBottom="6dp" />
+                    android:text="通讯录" android:textColor="#888888" android:textSize="14dp" android:layout_marginBottom="6dp" />
             </RelativeLayout>
 
 
@@ -266,7 +266,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="50dp" android:layout_height="20dp"
                     android:gravity="center"
-                    android:text="我" android:textColor="#888888" android:textSize="14dp" android:layout_marginBottom="6dp" />
+                    android:text="我的" android:textColor="#888888" android:textSize="14dp" android:layout_marginBottom="6dp" />
             </RelativeLayout>
 
 

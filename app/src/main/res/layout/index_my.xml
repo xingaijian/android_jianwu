@@ -266,7 +266,7 @@
         android:layout_centerVertical="true"
         android:textSize="16dp"
         android:layout_marginLeft="10dp"
-        android:text="分享"
+        android:text="修改密码"
         />
   </RelativeLayout>
   <View

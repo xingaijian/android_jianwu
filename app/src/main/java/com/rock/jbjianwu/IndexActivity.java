@@ -45,7 +45,7 @@ public class IndexActivity extends RockActivity {
 	private LinearLayout[] showviewobj = new LinearLayout[4];
 	private ImageView[]	   navimageview= new ImageView[4];
 	private TextView[]	   navtextview = new TextView[5];
-	private String[] 		titlearr   = {"消息","应用","联系人","我"};
+	private String[] 		titlearr   = {"消息","工作","通讯录","我的"};
 
 	private int what_chat = 3001,what_ying = 3002,what_userget = 3003,what_exit = 3004,chatindex=-1,what_chatdown = 3002,what_notmsg=4000,nowchatindex=-1,nowindex=0;
 	private IndexReceiver indexReceiver;
@@ -152,7 +152,7 @@ public class IndexActivity extends RockActivity {
 			exit(0);
 		}
 		if(id == R.id.mya_shatebtn){
-			gotoshare();
+			modifypass();//gotoshare();
 		}
 		if(id == R.id.mya_cachebtn){
 			clearWebViewCache();
@@ -808,6 +808,11 @@ public class IndexActivity extends RockActivity {
 		openurl("考勤打卡",url);
 	}
 
+	private void modifypass()//修改密码自己添加
+	{
+		String url = ""+Xinhu.APIURL+"?m=index&d=we&a=editpass&token="+Xinhu.admintoken+"&adminid="+Xinhu.adminid+"";
+		openurl("修改密码",url);
+	}
 
 
 	private PopupMenu popupMenu = null;
@@ -1128,7 +1133,8 @@ public class IndexActivity extends RockActivity {
 		av.setText(Xinhu.adminname+"("+Xinhu.adminmap.get("user")+")");
 
 		av = (TextView)view.findViewById(R.id.titles);
-		av.setText("部门："+Xinhu.adminmap.get("deptallname")+"\n职位："+Xinhu.adminmap.get("ranking")+"");
+		//av.setText("部门："+Xinhu.adminmap.get("deptallname")+"\n职位："+Xinhu.adminmap.get("ranking")+"");
+		av.setText("部门："+Xinhu.adminmap.get("deptallname")+"\n"+Xinhu.adminmap.get("ranking")+"");
 
 		ImageViewXinhu imgu = (ImageViewXinhu)view.findViewById(R.id.icons);
 		imgu.setPath(Xinhu.adminmap.get("face"));

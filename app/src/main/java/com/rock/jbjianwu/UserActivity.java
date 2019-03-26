@@ -64,7 +64,8 @@ public class UserActivity extends RockActivity {
 
 
 		av = (TextView) findViewById(R.id.titles);
-		av.setText("部门："+a.get("deptallname")+"\n职位："+a.get("ranking")+"");
+		//av.setText("部门："+a.get("deptallname")+"\n职位："+a.get("ranking")+"");
+		av.setText("部门："+a.get("deptallname")+"\n"+a.get("ranking")+"");
 
 		ImageViewXinhu imgu = (ImageViewXinhu)findViewById(R.id.icons);
 		imgu.setPath(a.get("face"));
