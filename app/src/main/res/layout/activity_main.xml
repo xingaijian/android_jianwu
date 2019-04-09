@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    android:background="#2C62F0"
-    >
+    android:background="@drawable/ic_first">
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/zhezhao"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -64,7 +64,7 @@
         android:textColor="#cccccc"
         android:gravity="center"
         android:text="Copyright ©2019 德州市人民检察院 www.dzjcy.gov.cn"
-        android:visibility="visible"
+        android:visibility="gone"
         android:textSize="14dp" />
 
 </RelativeLayout>

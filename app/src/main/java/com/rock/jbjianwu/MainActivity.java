@@ -61,14 +61,14 @@ public class MainActivity extends RockActivity implements EasyPermissions.Permis
 
 		String apptitle = Sqlite.getOption("apptitle", appname);
 
-		TextView at = (TextView) findViewById(R.id.appnameval);
-		at.setText(apptitle);
-		setface();
+//		TextView at = (TextView) findViewById(R.id.appnameval);
+//		at.setText(apptitle);
+//		setface();
 
 
-		String footer = "Copyright ©"+ CDate.now("Y","")+" 德州市人民检察院 "+Rock.getstring(this, R.string.appgwurl)+"";//"+Rock.getstring(this, R.string.appname)+"
-		at = (TextView) findViewById(R.id.banquan);
-		at.setText(footer);
+//		String footer = "Copyright ©"+ CDate.now("Y","")+" 德州市人民检察院 "+Rock.getstring(this, R.string.appgwurl)+"";//"+Rock.getstring(this, R.string.appname)+"
+//		at = (TextView) findViewById(R.id.banquan);
+//		at.setText(footer);
 
 		//设置全屏
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -104,11 +104,11 @@ public class MainActivity extends RockActivity implements EasyPermissions.Permis
 		finish();
 	}
 
-	private void setface()
+/*	private void setface()
 	{
 		ImageViewXinhu imga = (ImageViewXinhu)findViewById(R.id.myicons);
 		imga.setPath("images/logo.png");
-	}
+	}*/
 
 	/**
 	 * 1.获取版本信息

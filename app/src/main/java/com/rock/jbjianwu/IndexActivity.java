@@ -487,9 +487,10 @@ public class IndexActivity extends RockActivity {
 			final String tit = a.get("title");
 
 			//未激活前台   (不是小米推送 && !Rock.equals(ptype,Xinhu.PUSH_MESSAGE_TYPE_XIAOMI))
-			if(!isboolshow) {
-				Xinhu.Notification(mActivity, 0, tit, cont);
-			}
+//			if(!isboolshow) {
+//				Xinhu.Notification(mActivity, 0, tit, cont);
+//			}
+            Xinhu.Notification(mActivity, 0, tit, cont);
 
 			Dialog.confirm(this, cont);
 			Dialog.setTitle(tit);
@@ -587,6 +588,7 @@ public class IndexActivity extends RockActivity {
 				chatyidu();
 				//Rock.alert(this, lret.toString());
 				Xinhu.sendBroadcast(this, Xinhu.ACTION_CHATRECEMESS);
+				Xinhu.Notification(this, R.drawable.xinhu, pushmessagemap.get("name"), Jiami.base64decode(pushmessagemap.get("cont")));
 			}else if(!isboolshow){
 				//没有打开才发送通知(非小米)
 //				if(!Rock.equals(pushmessagemap.get("ptype"),Xinhu.PUSH_MESSAGE_TYPE_XIAOMI)){
