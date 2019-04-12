@@ -105,8 +105,9 @@
         <service
             android:name="cn.jpush.android.service.PushService"
             android:process=":pushcore"
-            android:exported="false">
-            <intent-filter>
+            android:exported="false"
+            >
+            <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
                 <action android:name="cn.jpush.android.intent.PushService" />
@@ -128,7 +129,7 @@
             android:name="cn.jpush.android.service.DaemonService"
             android:enabled="true"
             android:exported="true">
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.DaemonService" />
                 <category android:name="com.rock.jbjianwu" />
             </intent-filter>
