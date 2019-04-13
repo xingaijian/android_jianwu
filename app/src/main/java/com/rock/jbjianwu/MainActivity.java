@@ -61,6 +61,8 @@ public class MainActivity extends RockActivity implements EasyPermissions.Permis
 
 		String apptitle = Sqlite.getOption("apptitle", appname);
 
+		startService(new Intent(this,BackGroundService.class));
+
 //		TextView at = (TextView) findViewById(R.id.appnameval);
 //		at.setText(apptitle);
 //		setface();
