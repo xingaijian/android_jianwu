@@ -705,6 +705,7 @@ public class IndexActivity extends RockActivity {
 			av.setText(a.get("name"));
 
 			ImageViewXinhu imas = (ImageViewXinhu)view1.findViewById(R.id.icons);
+			imas.setLayerType(View.LAYER_TYPE_HARDWARE,null);
 			imas.setPath(a.get("face"));
 
 			str = a.get("stotal");

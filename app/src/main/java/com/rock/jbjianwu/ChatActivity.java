@@ -1,5 +1,8 @@
 package com.rock.jbjianwu;
 
+/**
+ * 聊天窗口
+ */
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
