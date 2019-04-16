@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lib.A;
 import com.lib.CDate;
 import com.lib.Jiami;
@@ -706,7 +707,8 @@ public class IndexActivity extends RockActivity {
 
 			ImageViewXinhu imas = (ImageViewXinhu)view1.findViewById(R.id.icons);
 			imas.setLayerType(View.LAYER_TYPE_HARDWARE,null);
-			imas.setPath(a.get("face"));
+			Glide.with(this).load(a.get("face")).into(imas);
+//			imas.setPath(a.get("face"));
 
 			str = a.get("stotal");
 			av = (TextView) view1.findViewById(R.id.stotal);
